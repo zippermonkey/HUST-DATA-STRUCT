@@ -21,7 +21,6 @@ typedef int ElemType; //数据元素类型定义
 typedef struct
 { //顺序表（顺序结构）的定义
 	ElemType *elem;
-	char name[41]; //表名字 在初始化表的时候写入
 	int length;
 	int listsize;
 } SqList;
@@ -29,7 +28,11 @@ typedef struct
 // 多表定义
 typedef struct
 {
-	/*
+	SqList **lists; // 存放表的指针 而不是放表本身
+	int listsnum;   // 当前存表个数
+	int listssize;  // 最大存表数
+
+/*
 操作：
 1. 将当前表存入多表中
 2. 罗列多表中的表
@@ -37,15 +40,11 @@ typedef struct
 4. 删除其中的一个表
 问题： 如何给不同的表进行标记  给表加名字或者ID  当保存到多表时  需要进行标识
 */
-	SqList **lists; // 存放表的指针 而不是放表本身
-	int listsnum;   // 当前存表个数
-	int listssize;  // 最大存表数
-
 } Lists;
 
 /*-----page 19 on textbook ---------*/
 status InitList(SqList **L);
-status DestroyList(SqList **L);
+status DestroyList(SqList *L);
 status ClearList(SqList *L);
 status ListEmpty(SqList *L);
 int ListLength(SqList *L);
@@ -82,14 +81,6 @@ int main(void)
 		printf("\n\n");
 		printf("      Menu for Linear Table On Sequence Structure \n");
 		printf("-------------------------------------------------\n");
-		if (L)
-		{
-			printf("The list %s is under your control.\n", L->name);
-		}
-		else
-		{
-			printf("Please create a list.\n");
-		}
 		printf("    	  1. InitList        7. LocateElem\n");
 		printf("    	  2. DestroyList     8. PriorElem\n");
 		printf("    	  3. ClearList       9. NextElem \n");
@@ -97,7 +88,7 @@ int main(void)
 		printf("    	  5. ListLength      11. ListDelete\n");
 		printf("    	  6. GetElem         12. ListTrabverse\n");
 		printf("    	  13. InputData      14. SavaList\n");
-		printf("    	  15. LoadList       16. (多表操作)\n");
+		printf("    	  15. LoadList       16. (多表操作)");
 		printf("    	  0. Exit\n");
 		printf("-------------------------------------------------\n");
 		printf("请选择你的操作[0~15]:");
@@ -116,7 +107,7 @@ int main(void)
 			break;
 		case 2:
 			// 销毁线性表
-			if (DestroyList(&L) == OVERFLOW)
+			if (DestroyList(L) == OVERFLOW)
 				printf("线性表销毁失败 因为线性表未创建！\n");
 			else
 				printf("线性表销毁成功！\n");
@@ -351,24 +342,21 @@ status InitList(SqList **L)
 		// L->elem动态内存分配失败
 		return OVERFLOW;
 	}
-	printf("请输入表名字 不超过40个字符\n");
-	scanf("%s", (*L)->name);
+	
 	(*L)->length = 0;
 	(*L)->listsize = LIST_INIT_SIZE;
 	return OK;
 }
-status DestroyList(SqList **L)
+status DestroyList(SqList *L)
 {
 	if (!L) // 线性表未创建
 		return INFEASTABLE;
-	else if (!(*L)->elem)
+	else if (!L->elem)
 		return INFEASTABLE;
 
-	(*L)->listsize =(*L)->length = 0;
-	free((*L)->elem);
-	(*L)->elem = NULL;
-	free(*L);
-	*L = NULL;
+	L->listsize = L->length = 0;
+	free(L->elem);
+	free(L);
 	return OK;
 }
 status ClearList(SqList *L)
@@ -602,12 +590,12 @@ status SaveList(SqList *L)
 		return INFEASTABLE;
 
 	FILE *fp;
-	// char filename[30];
-	// printf("input file name: ");
-	// scanf("%s", filename);
+	char filename[30];
+	printf("input file name: ");
+	scanf("%s", filename);
 
 	// 写文件
-	if ((fp = fopen(L->name, "wb")) == NULL) //文件打开失败
+	if ((fp = fopen(filename, "wb")) == NULL) //文件打开失败
 	{
 		printf("File open error\n ");
 		return ERROR;
