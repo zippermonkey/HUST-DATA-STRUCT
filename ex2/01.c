@@ -49,6 +49,7 @@ status NextElem(List L, int cur_e, int *next_e); // 用next_e带回 cur_e 的后继
 status ListInsert(List L, int i, int e);         // 在i的位置上插入e
 status ListDelete(List L, int i, int *e);        //  删除i的位置的值 用e带出
 status ListTrabverse(List L);                    // 遍历
+status InputData(List L);                        //手工输入数据
 
 int main(void)
 {
@@ -70,7 +71,7 @@ int main(void)
         printf("    	  - 4. ListEmpty        - 10. ListInsert\n");
         printf("    	  - 5. ListLength       - 11. ListDelete\n");
         printf("    	  - 6. GetElem          - 12. ListTrabverse\n");
-        printf("    	  - 0. Exit\n");
+        printf("    	  -13. InputData        - 0. Exit\n");
         printf("-------------------------------------------------\n");
         printf("    请选择你的操作[0~12]:");
         scanf("%d", &op);
@@ -285,6 +286,17 @@ int main(void)
                 sta = ListTrabverse(L);
                 if (sta == ERROR)
                     printf("线性表为空表\n");
+            }
+            getchar();
+            getchar();
+            break;
+        case 13:
+            if (isinit(L) == FALSE)
+                printf("线性表未创建\n");
+            else
+            {
+                printf("请输入数据，以q退出\n");
+                InputData(L);
             }
             getchar();
             getchar();
@@ -510,5 +522,27 @@ status ListTrabverse(List L)
         }
     }
     printf("\n");
+    return OK;
+}
+status InputData(List L)
+{ //手工输入数据  添到当前表的尾部
+
+    PtrToLNode p = L;
+    while (p->next) // 找到尾部
+    {
+        p = p->next;
+    }
+
+    int t;
+    while (scanf("%d", &t) == 1)
+    {
+        PtrToLNode q = (PtrToLNode)malloc(sizeof(LNode)); // 临时变量
+        q->data = t;
+        q->next = NULL;
+        p->next = q;
+        p = p->next;
+        L->data++;
+    }
+    p->next = NULL;
     return OK;
 }
