@@ -71,7 +71,8 @@ int main(void)
         printf("    	  - 4. ListEmpty        - 10. ListInsert\n");
         printf("    	  - 5. ListLength       - 11. ListDelete\n");
         printf("    	  - 6. GetElem          - 12. ListTrabverse\n");
-        printf("    	  -13. InputData        - 0. Exit\n");
+        printf("    	  -13. InputData        - 14. SaveList\n");
+        printf("    	  -15. LoadList         - 0. Exit\n");
         printf("-------------------------------------------------\n");
         printf("    请选择你的操作[0~12]:");
         scanf("%d", &op);
@@ -297,6 +298,32 @@ int main(void)
             {
                 printf("请输入数据，以q退出\n");
                 InputData(L);
+            }
+            getchar();
+            getchar();
+            break;
+        case 14:
+            if (isinit(L) == FALSE)
+                printf("线性表未创建\n");
+            else
+            {
+                if (SaveList(L) == ERROR)
+                    printf("文件打开失败\n");
+                else
+                    printf("保存成功\n");
+            }
+            getchar();
+            getchar();
+            break;
+        case 15:
+            if (isinit(L) == FALSE)
+                printf("线性表未创建\n");
+            else
+            {
+                if (LoadList(L) == ERROR)
+                    printf("文件打开失败\n");
+                else
+                    printf("加载成功\n");
             }
             getchar();
             getchar();
@@ -544,5 +571,57 @@ status InputData(List L)
         L->data++;
     }
     p->next = NULL;
+    return OK;
+}
+
+status SaveList(List L)
+{
+    char name[41];
+    printf("请输入文件名，少于40字符\n");
+    scanf("%s", name);
+    FILE *fp;
+    // 写文件
+    if ((fp = fopen(name, "wb")) == NULL) //文件打开失败
+    {
+        printf("File open error\n ");
+        return ERROR;
+    }
+    PtrToLNode p = L->next;
+    while (p)
+    {
+        fwrite(&(p->data), sizeof(ElemType), 1, fp);
+        p = p->next;
+    }
+
+    fclose(fp);
+    return OK;
+}
+
+status LoadList(List L)
+{
+    //读文件
+    FILE *fp;
+    char filename[30];
+    printf("input file name: ");
+    scanf("%s", filename);
+    if ((fp = fopen(filename, "rb")) == NULL)
+    {
+        printf("File open error\n ");
+        return ERROR;
+    }
+    L->data = 0;
+
+    PtrToLNode p = L;
+    PtrToLNode q = (PtrToLNode)malloc(sizeof(LNode));
+    while (fread(&(q->data), sizeof(ElemType), 1, fp))
+    {
+        q->next = NULL;
+        p->next = q;
+        p = p->next;
+        L->data++;
+        q = (PtrToLNode)malloc(sizeof(LNode));
+    }
+    p->next = NULL;
+    fclose(fp);
     return OK;
 }
