@@ -1,4 +1,4 @@
-// Ã»ÓĞ¶à±í
+// æ²¡æœ‰å¤šè¡¨
 
 /* Linear Table On Sequence Structure */
 #include <malloc.h>
@@ -16,14 +16,14 @@
 #define NOTFOUND -3
 
 typedef int status;
-typedef int ElemType; //Êı¾İÔªËØÀàĞÍ¶¨Òå
+typedef int ElemType; //æ•°æ®å…ƒç´ ç±»å‹å®šä¹‰
 
 /*-------page 22 on textbook -------*/
 #define LIST_INIT_SIZE 100
 #define LISTINCREMENT 10
-typedef struct { //Ë³Ğò±í£¨Ë³Ğò½á¹¹£©µÄ¶¨Òå
+typedef struct { //é¡ºåºè¡¨ï¼ˆé¡ºåºç»“æ„ï¼‰çš„å®šä¹‰
   ElemType *elem;
-  char name[41]; //±íÃû×Ö ÔÚ³õÊ¼»¯±íµÄÊ±ºòĞ´Èë
+  char name[41]; //è¡¨åå­— åœ¨åˆå§‹åŒ–è¡¨çš„æ—¶å€™å†™å…¥
   int length;
   int listsize;
 } SqList;
@@ -41,24 +41,24 @@ status ClearList(SqList *L);
 status ListEmpty(SqList *L);
 int ListLength(SqList *L);
 status GetElem(SqList *L, int i, ElemType *e);
-status LocateElem(SqList *L, ElemType e); //¼ò»¯¹ı
+status LocateElem(SqList *L, ElemType e); //ç®€åŒ–è¿‡
 status PriorElem(SqList *L, ElemType cur, ElemType *pre_e);
 status NextElem(SqList *L, ElemType cur, ElemType *next_e);
 status ListInsert(SqList *L, int i, ElemType e);
 status ListDelete(SqList *L, int i, ElemType *e);
-status ListTrabverse(SqList *L); //¼ò»¯¹ı
+status ListTrabverse(SqList *L); //ç®€åŒ–è¿‡
 /*--------------------------------------------*/
 
-status SaveList(SqList *L);  // ±£´æÊı¾İµ½ÎÄ¼ş
-status LoadList(SqList *L);  // ´ÓÎÄ¼ş¼ÓÔØÊı¾İ
-status InputData(SqList *L); // ÊÖ¶¯ÊäÈëÊı¾İ
+status SaveList(SqList *L);  // ä¿å­˜æ•°æ®åˆ°æ–‡ä»¶
+status LoadList(SqList *L);  // ä»æ–‡ä»¶åŠ è½½æ•°æ®
+status InputData(SqList *L); // æ‰‹åŠ¨è¾“å…¥æ•°æ®
 
-// ¶à±í²Ù×÷
-status ShowLists(Table *head);          // ÏÔÊ¾
-status Remove(Table *head);             //É¾³ı
-status AddList(Table *head, SqList *L); //Ôö¼Ó
-status Choose(Table *head, SqList **L); // Ñ¡Ôñ
-int LengthofTable(Table *head);         // Çó³¤¶È
+// å¤šè¡¨æ“ä½œ
+status ShowLists(Table *head);          // æ˜¾ç¤º
+status Remove(Table *head);             //åˆ é™¤
+status AddList(Table *head, SqList *L); //å¢åŠ 
+status Choose(Table *head, SqList **L); // é€‰æ‹©
+int LengthofTable(Table *head);         // æ±‚é•¿åº¦
 
 int main(void) {
   SqList *L = NULL;
@@ -66,12 +66,12 @@ int main(void) {
   head->next = NULL;
   int op = 1;
   /********/
-  // ´Ë´¦Îª¶¨ÒåµÄÒ»Ğ©ÁÙÊ±±äÁ¿  ¾ßÌå×÷ÓÃ¿´²»Í¬µÄcase
+  // æ­¤å¤„ä¸ºå®šä¹‰çš„ä¸€äº›ä¸´æ—¶å˜é‡  å…·ä½“ä½œç”¨çœ‹ä¸åŒçš„case
   int i = 0;
   int e = -1;
   int pre_e = -1;
   int next_e = -1;
-  status sta = OK; // ±íÊ¾º¯Êı·µ»ØÖµ
+  status sta = OK; // è¡¨ç¤ºå‡½æ•°è¿”å›å€¼
   /********/
   while (op) {
     // linux
@@ -94,178 +94,178 @@ int main(void) {
     printf("    	  17. AddToTable        18. ShowLists\n");
     printf("    	  19. Remove            0. Exit\n");
     printf("-------------------------------------------------\n");
-    printf("ÇëÑ¡ÔñÄãµÄ²Ù×÷[0~19]:");
+    printf("è¯·é€‰æ‹©ä½ çš„æ“ä½œ[0~19]:");
     scanf("%d", &op);
     switch (op) {
     case 1:
-      // ³õÊ¼»¯Ò»¸öÏßĞÔ±í
+      // åˆå§‹åŒ–ä¸€ä¸ªçº¿æ€§è¡¨
       if (InitList(&L) == OVERFLOW)
-        printf("ÏßĞÔ±í´´½¨Ê§°Ü£¡\n");
+        printf("çº¿æ€§è¡¨åˆ›å»ºå¤±è´¥ï¼\n");
       else
-        printf("ÏßĞÔ±í´´½¨³É¹¦£¡\n");
-      printf("°´ÈÎÒâ¼ü¼ÌĞø\n");
+        printf("çº¿æ€§è¡¨åˆ›å»ºæˆåŠŸï¼\n");
+      printf("æŒ‰ä»»æ„é”®ç»§ç»­\n");
       getchar();
       getchar();
       break;
     case 2:
-      // Ïú»ÙÏßĞÔ±í
+      // é”€æ¯çº¿æ€§è¡¨
       if (DestroyList(&L) == INFEASTABLE)
-        printf("ÏßĞÔ±íÏú»ÙÊ§°Ü ÒòÎªÏßĞÔ±íÎ´´´½¨£¡\n");
+        printf("çº¿æ€§è¡¨é”€æ¯å¤±è´¥ å› ä¸ºçº¿æ€§è¡¨æœªåˆ›å»ºï¼\n");
       else
-        printf("ÏßĞÔ±íÏú»Ù³É¹¦£¡\n");
-      printf("°´ÈÎÒâ¼ü¼ÌĞø\n");
+        printf("çº¿æ€§è¡¨é”€æ¯æˆåŠŸï¼\n");
+      printf("æŒ‰ä»»æ„é”®ç»§ç»­\n");
       getchar();
       getchar();
 
       break;
     case 3:
-      // Çå¿ÕÏßĞÔ±í
+      // æ¸…ç©ºçº¿æ€§è¡¨
       if (ClearList(L) == OK)
-        printf("ÏßĞÔ±íÇå¿Õ³É¹¦£¡\n");
+        printf("çº¿æ€§è¡¨æ¸…ç©ºæˆåŠŸï¼\n");
       else
-        printf("ÏßĞÔ±íÎ´´´½¨£¬Çå¿ÕÊ§°Ü£¡\n");
-      printf("°´ÈÎÒâ¼ü¼ÌĞø\n");
+        printf("çº¿æ€§è¡¨æœªåˆ›å»ºï¼Œæ¸…ç©ºå¤±è´¥ï¼\n");
+      printf("æŒ‰ä»»æ„é”®ç»§ç»­\n");
       getchar();
       getchar();
 
       break;
     case 4:
-      // ÅĞ¶ÏÏßĞÔ±íÊÇ·ñÎª¿Õ
+      // åˆ¤æ–­çº¿æ€§è¡¨æ˜¯å¦ä¸ºç©º
       if (ListEmpty(L) == INFEASTABLE)
-        printf("ÏßĞÔ±íÎ´´´½¨£¡\n");
+        printf("çº¿æ€§è¡¨æœªåˆ›å»ºï¼\n");
       else if (ListEmpty(L) == FALSE)
-        printf("ÏßĞÔ±í²»Îª¿Õ£¡\n");
+        printf("çº¿æ€§è¡¨ä¸ä¸ºç©ºï¼\n");
       else
-        printf("ÏßĞÔ±íÎª¿Õ£¡\n");
-      printf("°´ÈÎÒâ¼ü¼ÌĞø\n");
+        printf("çº¿æ€§è¡¨ä¸ºç©ºï¼\n");
+      printf("æŒ‰ä»»æ„é”®ç»§ç»­\n");
       getchar();
       getchar();
 
       break;
     case 5:
-      // ÇóÏßĞÔ±í³¤¶È
+      // æ±‚çº¿æ€§è¡¨é•¿åº¦
       if (ListLength(L) != INFEASTABLE)
-        printf("ÏßĞÔ±í³¤¶ÈÎª%d\n", ListLength(L));
+        printf("çº¿æ€§è¡¨é•¿åº¦ä¸º%d\n", ListLength(L));
       else
-        printf("ÏßĞÔ±íÎ´´´½¨\n");
-      printf("°´ÈÎÒâ¼ü¼ÌĞø\n");
+        printf("çº¿æ€§è¡¨æœªåˆ›å»º\n");
+      printf("æŒ‰ä»»æ„é”®ç»§ç»­\n");
       getchar();
       getchar();
       break;
     case 6:
-      // È¡µÃ±íÖĞµÄµÚiÎ»ÔªËØ  ´Ó1¿ªÊ¼Êı
-      printf("ÇëÊäÈëÒªÈ¡µÃÏßĞÔ±íÖĞµÄÄÄÒ»Î»ÔªËØ(i) ´Ó1¿ªÊ¼Êı£º ");
+      // å–å¾—è¡¨ä¸­çš„ç¬¬iä½å…ƒç´   ä»1å¼€å§‹æ•°
+      printf("è¯·è¾“å…¥è¦å–å¾—çº¿æ€§è¡¨ä¸­çš„å“ªä¸€ä½å…ƒç´ (i) ä»1å¼€å§‹æ•°ï¼š ");
       scanf("%d", &i);
-      sta = GetElem(L, i, &e); // sta±íÊ¾º¯Êı×´Ì¬
+      sta = GetElem(L, i, &e); // staè¡¨ç¤ºå‡½æ•°çŠ¶æ€
       if (sta != OK) {
         if (sta == INFEASTABLE)
-          printf("ÏßĞÔ±íÎ´´´½¨\n");
+          printf("çº¿æ€§è¡¨æœªåˆ›å»º\n");
         else if (sta == ERROR)
-          printf("iÖµ²»ºÏ·¨\n");
+          printf("iå€¼ä¸åˆæ³•\n");
       } else {
-        printf("µÚ%dÎ»ÔªËØÊÇ%d\n", i, e);
+        printf("ç¬¬%dä½å…ƒç´ æ˜¯%d\n", i, e);
       }
-      printf("°´ÈÎÒâ¼ü¼ÌĞø\n");
+      printf("æŒ‰ä»»æ„é”®ç»§ç»­\n");
       getchar();
       getchar();
 
       break;
     case 7:
-      //ÊäÈëÒ»¸öÔªËØÖµ ½«·µ»ØËüÔÚ±íÖĞµÄÎ»ÖÃ
-      printf("ÇëÊäÈëÒ»¸öÔªËØÖµ ½«·µ»ØËüÔÚ±íÖĞµÄÎ»ÖÃ\n");
+      //è¾“å…¥ä¸€ä¸ªå…ƒç´ å€¼ å°†è¿”å›å®ƒåœ¨è¡¨ä¸­çš„ä½ç½®
+      printf("è¯·è¾“å…¥ä¸€ä¸ªå…ƒç´ å€¼ å°†è¿”å›å®ƒåœ¨è¡¨ä¸­çš„ä½ç½®\n");
       scanf("%d", &e);
-      sta = LocateElem(L, e); // t±íÊ¾º¯ÊıµÄ×´Ì¬
+      sta = LocateElem(L, e); // tè¡¨ç¤ºå‡½æ•°çš„çŠ¶æ€
       if (sta == INFEASTABLE) {
-        printf("ÏßĞÔ±íÎ´´´½¨\n");
+        printf("çº¿æ€§è¡¨æœªåˆ›å»º\n");
       } else if (sta == NOTFOUND) {
-        printf("±íÖĞÃ»ÓĞÕâ¸öÔªËØ\n");
+        printf("è¡¨ä¸­æ²¡æœ‰è¿™ä¸ªå…ƒç´ \n");
       } else {
-        printf("%dµÄÎ»ÖÃÊÇ%d\n", e, sta);
+        printf("%dçš„ä½ç½®æ˜¯%d\n", e, sta);
       }
-      printf("°´ÈÎÒâ¼ü¼ÌĞø\n");
+      printf("æŒ‰ä»»æ„é”®ç»§ç»­\n");
       getchar();
       getchar();
 
       break;
     case 8:
-      // ÇóÔªËØÇ°Çı
-      printf("ÊäÈëÏßĞÔ±íÖĞµÄÒ»¸öÊı: ");
+      // æ±‚å…ƒç´ å‰é©±
+      printf("è¾“å…¥çº¿æ€§è¡¨ä¸­çš„ä¸€ä¸ªæ•°: ");
       scanf("%d", &e);
-      sta = PriorElem(L, e, &pre_e); // sta ±íÊ¾º¯Êı·µ»ØÖµ
+      sta = PriorElem(L, e, &pre_e); // sta è¡¨ç¤ºå‡½æ•°è¿”å›å€¼
       if (sta == OK)
-        printf("%dµÄÇ°ÇıÊÇ%d\n", e, pre_e);
+        printf("%dçš„å‰é©±æ˜¯%d\n", e, pre_e);
       else if (sta == INFEASTABLE)
-        printf("ÏßĞÔ±íÎ´´´½¨\n");
+        printf("çº¿æ€§è¡¨æœªåˆ›å»º\n");
       else if (sta == ERROR)
-        printf("%dÎªµÚÒ»¸öÔªËØ,Ã»ÓĞÇ°Çı\n", e);
+        printf("%dä¸ºç¬¬ä¸€ä¸ªå…ƒç´ ,æ²¡æœ‰å‰é©±\n", e);
       else if (sta == NOTFOUND)
-        printf("±íÖĞ²»´æÔÚÔªËØ%d\n", e);
-      printf("°´ÈÎÒâ¼ü¼ÌĞø\n");
+        printf("è¡¨ä¸­ä¸å­˜åœ¨å…ƒç´ %d\n", e);
+      printf("æŒ‰ä»»æ„é”®ç»§ç»­\n");
       getchar();
       getchar();
 
       break;
     case 9:
-      // ÇóÔªËØºó¼Ì
-      printf("ÊäÈëÏßĞÔ±íÖĞµÄÒ»¸öÊı: ");
+      // æ±‚å…ƒç´ åç»§
+      printf("è¾“å…¥çº¿æ€§è¡¨ä¸­çš„ä¸€ä¸ªæ•°: ");
       scanf("%d", &e);
-      sta = NextElem(L, e, &next_e); // sta ±íÊ¾º¯Êı·µ»ØÖµ
+      sta = NextElem(L, e, &next_e); // sta è¡¨ç¤ºå‡½æ•°è¿”å›å€¼
       if (sta == OK)
-        printf("%dµÄºó¼ÌÊÇ%d\n", e, next_e);
+        printf("%dçš„åç»§æ˜¯%d\n", e, next_e);
       else if (sta == INFEASTABLE)
-        printf("ÏßĞÔ±íÎ´´´½¨\n");
+        printf("çº¿æ€§è¡¨æœªåˆ›å»º\n");
       else if (sta == ERROR)
-        printf("%dÎª×îºóÒ»¸öÔªËØ,Ã»ÓĞºó¼Ì\n", e);
+        printf("%dä¸ºæœ€åä¸€ä¸ªå…ƒç´ ,æ²¡æœ‰åç»§\n", e);
       else if (sta == NOTFOUND)
-        printf("²»´æÔÚÔªËØ%d\n", e);
-      printf("°´ÈÎÒâ¼ü¼ÌĞø\n");
+        printf("ä¸å­˜åœ¨å…ƒç´ %d\n", e);
+      printf("æŒ‰ä»»æ„é”®ç»§ç»­\n");
       getchar();
       getchar();
       break;
     case 10:
-      // ²åÈëÔªËØ
-      printf("ÊäÈë²åÈëµÄÎ»ÖÃi£¨´Ó1¿ªÊ¼¼ÆÊı£©\n");
+      // æ’å…¥å…ƒç´ 
+      printf("è¾“å…¥æ’å…¥çš„ä½ç½®iï¼ˆä»1å¼€å§‹è®¡æ•°ï¼‰\n");
       scanf("%d", &i);
-      printf("ÊäÈë²åÈëµÄÖµe\n");
+      printf("è¾“å…¥æ’å…¥çš„å€¼e\n");
       scanf("%d", &e);
       sta = ListInsert(L, i, e);
       if (sta == OK)
-        printf("²åÈë³É¹¦£¡\n");
+        printf("æ’å…¥æˆåŠŸï¼\n");
       else if (sta == INFEASTABLE)
-        printf("ÏßĞÔ±íÎ´´´½¨\n");
+        printf("çº¿æ€§è¡¨æœªåˆ›å»º\n");
       else if (sta == ERROR)
-        printf("²åÈëÎ»ÖÃ²»ºÏ·¨\n");
-      printf("°´ÈÎÒâ¼ü¼ÌĞø\n");
+        printf("æ’å…¥ä½ç½®ä¸åˆæ³•\n");
+      printf("æŒ‰ä»»æ„é”®ç»§ç»­\n");
       getchar();
       getchar();
 
       break;
     case 11:
-      // É¾³ıÔªËØ
-      printf("ÊäÈëÉ¾³ıµÄÎ»ÖÃi£¨´Ó1¿ªÊ¼¼ÆÊı£©\n");
+      // åˆ é™¤å…ƒç´ 
+      printf("è¾“å…¥åˆ é™¤çš„ä½ç½®iï¼ˆä»1å¼€å§‹è®¡æ•°ï¼‰\n");
       scanf("%d", &i);
       sta = ListDelete(L, i, &e);
       if (sta == OK) {
-        printf("É¾³ı%d³É¹¦£¡\n", e);
+        printf("åˆ é™¤%dæˆåŠŸï¼\n", e);
       } else if (sta == INFEASTABLE)
-        printf("ÏßĞÔ±íÎ´´´½¨\n");
+        printf("çº¿æ€§è¡¨æœªåˆ›å»º\n");
 
       else if (sta == ERROR)
-        printf("É¾³ıÎ»ÖÃ²»ºÏ·¨\n");
-      printf("°´ÈÎÒâ¼ü¼ÌĞø\n");
+        printf("åˆ é™¤ä½ç½®ä¸åˆæ³•\n");
+      printf("æŒ‰ä»»æ„é”®ç»§ç»­\n");
       getchar();
       getchar();
 
       break;
     case 12:
-      // ±éÀúÔªËØ
+      // éå†å…ƒç´ 
       sta = ListTrabverse(L);
       if (sta == INFEASTABLE)
-        printf("ÏßĞÔ±íÎ´´´½¨\n");
+        printf("çº¿æ€§è¡¨æœªåˆ›å»º\n");
       else if (sta == ERROR)
-        printf("ÏßĞÔ±íÎª¿Õ\n");
+        printf("çº¿æ€§è¡¨ä¸ºç©º\n");
 
-      printf("°´ÈÎÒâ¼ü¼ÌĞø\n");
+      printf("æŒ‰ä»»æ„é”®ç»§ç»­\n");
       getchar();
       getchar();
 
@@ -273,62 +273,62 @@ int main(void) {
     case 13:
       sta = InputData(L);
       if (sta == INFEASTABLE) {
-        printf("ÏßĞÔ±íÎ´´´½¨\n");
+        printf("çº¿æ€§è¡¨æœªåˆ›å»º\n");
       }
-      printf("°´ÈÎÒâ¼ü¼ÌĞø\n");
+      printf("æŒ‰ä»»æ„é”®ç»§ç»­\n");
       getchar();
       getchar();
       break;
 
     case 14:
-      // ½«µ±Ç°±í±£´æµ½ÎÄ¼ş
+      // å°†å½“å‰è¡¨ä¿å­˜åˆ°æ–‡ä»¶
       sta = SaveList(L);
       if (sta == INFEASTABLE)
-        printf("ÏßĞÔ±íÎ´´´½¨\n");
+        printf("çº¿æ€§è¡¨æœªåˆ›å»º\n");
       else if (sta == ERROR)
-        printf("ÎÄ¼ş´ò¿ªÊ§°Ü\n");
+        printf("æ–‡ä»¶æ‰“å¼€å¤±è´¥\n");
       else
-        printf("±£´æÎª%s³É¹¦\n", L->name);
-      printf("°´ÈÎÒâ¼ü¼ÌĞø\n");
+        printf("ä¿å­˜ä¸º%sæˆåŠŸ\n", L->name);
+      printf("æŒ‰ä»»æ„é”®ç»§ç»­\n");
       getchar();
       getchar();
       break;
     case 15:
-      // ´ÓÎÄ¼ş¼ÓÔØ±í Ç°ÌáÊÇÏÈ´´½¨±í
+      // ä»æ–‡ä»¶åŠ è½½è¡¨ å‰ææ˜¯å…ˆåˆ›å»ºè¡¨
       sta = LoadList(L);
       if (sta == INFEASTABLE)
-        printf("ÏßĞÔ±íÎ´´´½¨\n");
+        printf("çº¿æ€§è¡¨æœªåˆ›å»º\n");
       else if (sta == ERROR)
-        printf("ÎÄ¼ş´ò¿ªÊ§°Ü\n");
+        printf("æ–‡ä»¶æ‰“å¼€å¤±è´¥\n");
       else
-        printf("¼ÓÔØ³É¹¦\n");
+        printf("åŠ è½½æˆåŠŸ\n");
       getchar();
       getchar();
       break;
     case 16:
-      // ´Ó¶à±íÖĞÑ¡È¡Ò»¸ö±í
+      // ä»å¤šè¡¨ä¸­é€‰å–ä¸€ä¸ªè¡¨
       sta = Choose(head, &L);
       if (sta == ERROR)
-        printf("ĞòºÅ²»ºÏ·¨");
+        printf("åºå·ä¸åˆæ³•");
       else if (sta == OK)
-        printf("°´ÈÎÒâ¼ü¼ÌĞø\n");
+        printf("æŒ‰ä»»æ„é”®ç»§ç»­\n");
       getchar();
       getchar();
       break;
 
     case 17:
-      // Ìí¼Ó
+      // æ·»åŠ 
       sta = AddList(head, L);
       if (sta == INFEASTABLE)
-        printf("ÏßĞÔ±íÎ´´´¼ü\n");
-      printf("°´ÈÎÒâ¼ü¼ÌĞø\n");
+        printf("çº¿æ€§è¡¨æœªåˆ›é”®\n");
+      printf("æŒ‰ä»»æ„é”®ç»§ç»­\n");
       getchar();
       getchar();
       break;
     case 18:
-      // ÏÔÊ¾
+      // æ˜¾ç¤º
       sta = ShowLists(head);
-      printf("°´ÈÎÒâ¼ü¼ÌĞø\n");
+      printf("æŒ‰ä»»æ„é”®ç»§ç»­\n");
       getchar();
       getchar();
       break;
@@ -336,9 +336,9 @@ int main(void) {
     case 19:
       sta = Remove(head);
       if (sta == ERROR)
-        printf("iÖµ²»ºÏ·¨\n");
+        printf("iå€¼ä¸åˆæ³•\n");
       else
-        printf("°´ÈÎÒâ¼ü¼ÌĞø\n");
+        printf("æŒ‰ä»»æ„é”®ç»§ç»­\n");
       getchar();
       getchar();
       break;
@@ -346,35 +346,35 @@ int main(void) {
       break;
 
     default:
-      printf("ÇëÊäÈëÓĞĞ§Öµ\n");
+      printf("è¯·è¾“å…¥æœ‰æ•ˆå€¼\n");
       getchar();
       getchar();
       break;
     } // end of switch
   }   // end of while
-  printf("»¶Ó­ÏÂ´ÎÔÙÊ¹ÓÃ±¾ÏµÍ³£¡\n");
+  printf("æ¬¢è¿ä¸‹æ¬¡å†ä½¿ç”¨æœ¬ç³»ç»Ÿï¼\n");
   return 0;
 } // end of main()
 
 status InitList(SqList **L) {
   *L = (SqList *)malloc(sizeof(SqList));
   if (*L == NULL) {
-    // L¶¯Ì¬ÄÚ´æ·ÖÅäÊ§°Ü
+    // LåŠ¨æ€å†…å­˜åˆ†é…å¤±è´¥
     return OVERFLOW;
   }
   (*L)->elem = (ElemType *)malloc(sizeof(ElemType) * LIST_INIT_SIZE);
   if ((*L)->elem == NULL) {
-    // L->elem¶¯Ì¬ÄÚ´æ·ÖÅäÊ§°Ü
+    // L->elemåŠ¨æ€å†…å­˜åˆ†é…å¤±è´¥
     return OVERFLOW;
   }
-  printf("ÇëÊäÈë±íÃû×Ö ²»³¬¹ı40¸ö×Ö·û\n");
+  printf("è¯·è¾“å…¥è¡¨åå­— ä¸è¶…è¿‡40ä¸ªå­—ç¬¦\n");
   scanf("%s", (*L)->name);
   (*L)->length = 0;
   (*L)->listsize = LIST_INIT_SIZE;
   return OK;
 }
 status DestroyList(SqList **L) {
-  if ((*L) == NULL) // ÏßĞÔ±íÎ´´´½¨
+  if ((*L) == NULL) // çº¿æ€§è¡¨æœªåˆ›å»º
     return INFEASTABLE;
   else if (!(*L)->elem)
     return INFEASTABLE;
@@ -387,7 +387,7 @@ status DestroyList(SqList **L) {
   return OK;
 }
 status ClearList(SqList *L) {
-  if (!L) // ÏßĞÔ±íÎ´´´½¨
+  if (!L) // çº¿æ€§è¡¨æœªåˆ›å»º
     return INFEASTABLE;
   else if (!L->elem)
     return INFEASTABLE;
@@ -395,14 +395,14 @@ status ClearList(SqList *L) {
   return OK;
 }
 status ListEmpty(SqList *L) {
-  if (!L) // ÏßĞÔ±íÎ´´´½¨
+  if (!L) // çº¿æ€§è¡¨æœªåˆ›å»º
     return INFEASTABLE;
   else if (!L->elem)
     return INFEASTABLE;
-  return L->length == 0; // L->length == 0ÔòÎª¿Õ±í
+  return L->length == 0; // L->length == 0åˆ™ä¸ºç©ºè¡¨
 }
 int ListLength(SqList *L) {
-  if (!L) // ÏßĞÔ±íÎ´´´½¨
+  if (!L) // çº¿æ€§è¡¨æœªåˆ›å»º
     return INFEASTABLE;
   else if (!L->elem)
     return INFEASTABLE;
@@ -410,49 +410,49 @@ int ListLength(SqList *L) {
   return L->length;
 }
 status GetElem(SqList *L, int i, ElemType *e) {
-  if (!L) // ÏßĞÔ±íÎ´´´½¨
+  if (!L) // çº¿æ€§è¡¨æœªåˆ›å»º
     return INFEASTABLE;
   else if (!L->elem)
     return INFEASTABLE;
 
-  if (i < 1 || i > L->length) // ÇëÇóÔ½½ç
+  if (i < 1 || i > L->length) // è¯·æ±‚è¶Šç•Œ
   {
     return ERROR;
   }
 
-  *e = *(L->elem + i - 1); // °ÑeÖ¸ÏòÒªÈ¡µÃµÄÔªËØ
+  *e = *(L->elem + i - 1); // æŠŠeæŒ‡å‘è¦å–å¾—çš„å…ƒç´ 
   return OK;
 }
 
 int LocateElem(SqList *L, ElemType e) {
-  // ÒÔ1¿ªÊ¼
-  if (!L) // ÏßĞÔ±íÎ´´´½¨
+  // ä»¥1å¼€å§‹
+  if (!L) // çº¿æ€§è¡¨æœªåˆ›å»º
     return INFEASTABLE;
   else if (!L->elem)
     return INFEASTABLE;
   for (int i = 1; i <= L->length; i++) {
     if (e == L->elem[i - 1]) {
-      return i; //·µ»ØµÚÎ»ÖÃi  i´Ó1¿ªÊ¼
+      return i; //è¿”å›ç¬¬ä½ç½®i  iä»1å¼€å§‹
     }
   }
-  return NOTFOUND; //Ã»ÓĞÕÒµ½
+  return NOTFOUND; //æ²¡æœ‰æ‰¾åˆ°
 }
 
 status PriorElem(SqList *L, ElemType cur, ElemType *pre_e) {
-  if (!L) // ÏßĞÔ±íÎ´´´½¨
+  if (!L) // çº¿æ€§è¡¨æœªåˆ›å»º
     return INFEASTABLE;
   else if (!L->elem)
     return INFEASTABLE;
 
-  // Ñ°ÕÒÔªËØcur
+  // å¯»æ‰¾å…ƒç´ cur
   int i = 1;
   for (i = 1; i <= L->length; i++)
     if (cur == L->elem[i - 1])
       break;
-  if (i == L->length + 1) // Ã»ÕÒµ½
+  if (i == L->length + 1) // æ²¡æ‰¾åˆ°
   {
     return NOTFOUND;
-  } else if (i == 1) // Èç¹ûcurÎªµÚÒ»¸öÔªËØ ÔòÃ»ÓĞÇ°Çı
+  } else if (i == 1) // å¦‚æœcurä¸ºç¬¬ä¸€ä¸ªå…ƒç´  åˆ™æ²¡æœ‰å‰é©±
   {
     return ERROR;
   } else {
@@ -462,22 +462,22 @@ status PriorElem(SqList *L, ElemType cur, ElemType *pre_e) {
 }
 
 status NextElem(SqList *L, ElemType cur, ElemType *next_e) {
-  if (!L) // ÏßĞÔ±íÎ´´´½¨
+  if (!L) // çº¿æ€§è¡¨æœªåˆ›å»º
     return INFEASTABLE;
   else if (!L->elem)
     return INFEASTABLE;
 
-  // Ñ°ÕÒÔªËØcur
+  // å¯»æ‰¾å…ƒç´ cur
   int i = 1;
   for (i = 1; i <= L->length; i++) {
     if (cur == L->elem[i - 1]) {
       break;
     }
   }
-  if (i == L->length + 1) // Ã»ÕÒµ½
+  if (i == L->length + 1) // æ²¡æ‰¾åˆ°
   {
     return NOTFOUND;
-  } else if (i == L->length) // Èç¹ûcurÎª×îºóÒ»¸öÔªËØ ÔòÃ»ÓĞºó¼Ì
+  } else if (i == L->length) // å¦‚æœcurä¸ºæœ€åä¸€ä¸ªå…ƒç´  åˆ™æ²¡æœ‰åç»§
   {
     return ERROR;
   } else {
@@ -486,16 +486,16 @@ status NextElem(SqList *L, ElemType cur, ElemType *next_e) {
   }
 }
 status ListInsert(SqList *L, int i, ElemType e) {
-  // ²åÈëÔªËØ
-  if (!L) // ÏßĞÔ±íÎ´´´½¨
+  // æ’å…¥å…ƒç´ 
+  if (!L) // çº¿æ€§è¡¨æœªåˆ›å»º
     return INFEASTABLE;
   else if (!L->elem)
     return INFEASTABLE;
 
-  if (i < 1 || i > L->length + 1) // ²åÈëÎ»ÖÃ²»ºÏ·¨
+  if (i < 1 || i > L->length + 1) // æ’å…¥ä½ç½®ä¸åˆæ³•
     return ERROR;
 
-  if (L->length >= L->listsize) { // ¿Õ¼ä²»×ã ÖØĞÂ·ÖÅä
+  if (L->length >= L->listsize) { // ç©ºé—´ä¸è¶³ é‡æ–°åˆ†é…
     ElemType *newbase = (ElemType *)realloc(
         L->elem, (L->listsize + LISTINCREMENT) * sizeof(ElemType));
     if (!newbase)
@@ -504,10 +504,10 @@ status ListInsert(SqList *L, int i, ElemType e) {
     L->listsize += LISTINCREMENT;
   }
 
-  ElemType *q = &(L->elem[i - 1]); // qÎªÒª²åÈëµÄÎ»ÖÃ
+  ElemType *q = &(L->elem[i - 1]); // qä¸ºè¦æ’å…¥çš„ä½ç½®
 
   for (ElemType *p = &(L->elem[L->length - 1]); p >= q; --p)
-    // ²åÈëÎ»ÖÃ¼°Ö®ºóµÄÔªËØÓÒÒÆ
+    // æ’å…¥ä½ç½®åŠä¹‹åçš„å…ƒç´ å³ç§»
     *(p + 1) = *p;
 
   *q = e;
@@ -516,39 +516,39 @@ status ListInsert(SqList *L, int i, ElemType e) {
 }
 
 status ListDelete(SqList *L, int i, ElemType *e) {
-  // ÔÚË³ĞòÏßĞÔ±íLÖĞÉ¾³ıµÚi¸öÔªËØ ²¢ÓÃe·µ»ØÖµ
-  // iµÄºÏ·¨Î»ÖÃÎª1<= i <= L->length
-  if (!L) // ÏßĞÔ±íÎ´´´½¨
+  // åœ¨é¡ºåºçº¿æ€§è¡¨Lä¸­åˆ é™¤ç¬¬iä¸ªå…ƒç´  å¹¶ç”¨eè¿”å›å€¼
+  // içš„åˆæ³•ä½ç½®ä¸º1<= i <= L->length
+  if (!L) // çº¿æ€§è¡¨æœªåˆ›å»º
     return INFEASTABLE;
   else if (!L->elem)
     return INFEASTABLE;
 
-  if (i < 1 || i > L->length) // iÖµ²»ºÏ·¨
+  if (i < 1 || i > L->length) // iå€¼ä¸åˆæ³•
     return ERROR;
 
-  ElemType *p = &(L->elem[i - 1]); // pÎªÒªÉ¾³ıµÄÔªËØµØÖ·
+  ElemType *p = &(L->elem[i - 1]); // pä¸ºè¦åˆ é™¤çš„å…ƒç´ åœ°å€
   *e = *p;
 
-  ElemType *q = &(L->elem[L->length - 1]); // qÎª±íÎ²ÔªËØµØÖ·
+  ElemType *q = &(L->elem[L->length - 1]); // qä¸ºè¡¨å°¾å…ƒç´ åœ°å€
 
-  for (p++; p <= q; p++) // ÔªËØÒÆ¶¯
+  for (p++; p <= q; p++) // å…ƒç´ ç§»åŠ¨
     *(p - 1) = *p;
 
   L->length--;
   return OK;
 }
 status ListTrabverse(SqList *L) {
-  if (!L) // ÏßĞÔ±íÎ´´´½¨
+  if (!L) // çº¿æ€§è¡¨æœªåˆ›å»º
 
     return INFEASTABLE;
   else if (!L->elem)
     return INFEASTABLE;
 
   if (L->length == 0)
-    // ¿Õ±í
+    // ç©ºè¡¨
     return ERROR;
   for (int i = 0; i < L->length; i++) {
-    // ±éÀú
+    // éå†
     printf("%d", L->elem[i]);
     if (i < L->length - 1)
       printf(" --> ");
@@ -558,19 +558,19 @@ status ListTrabverse(SqList *L) {
 }
 
 status InputData(SqList *L) {
-  // ÊÖ¶¯ÊäÈëÊı¾İ
+  // æ‰‹åŠ¨è¾“å…¥æ•°æ®
 
-  if (!L) // ÏßĞÔ±íÎ´´´½¨
+  if (!L) // çº¿æ€§è¡¨æœªåˆ›å»º
   {
     return INFEASTABLE;
   } else if (!L->elem) {
     return INFEASTABLE;
   }
-  printf("ÇëÊäÈëÊı¾İ£¨ÕûÊı£©£¬ÒÔ¿Õ¸ñ·Ö¸ô,ÒÔqÍË³ö\n");
+  printf("è¯·è¾“å…¥æ•°æ®ï¼ˆæ•´æ•°ï¼‰ï¼Œä»¥ç©ºæ ¼åˆ†éš”,ä»¥qé€€å‡º\n");
   int x = 0;
 
   while ((scanf("%d", &x) == 1)) {
-    if (L->length >= L->listsize) { // ¿Õ¼ä²»×ã ÖØĞÂ·ÖÅä
+    if (L->length >= L->listsize) { // ç©ºé—´ä¸è¶³ é‡æ–°åˆ†é…
       ElemType *newbase = (ElemType *)realloc(
           L->elem, (L->listsize + LISTINCREMENT) * sizeof(ElemType));
       if (!newbase)
@@ -578,20 +578,20 @@ status InputData(SqList *L) {
       L->elem = newbase;
       L->listsize += LISTINCREMENT;
     }
-    L->elem[L->length++] = x; // Ğ´ÈëÊı¾İ
+    L->elem[L->length++] = x; // å†™å…¥æ•°æ®
   }
   return OK;
 }
 
 status SaveList(SqList *L) {
-  if (!L) // ÏßĞÔ±íÎ´´´½¨
+  if (!L) // çº¿æ€§è¡¨æœªåˆ›å»º
     return INFEASTABLE;
   else if (!L->elem)
     return INFEASTABLE;
 
   FILE *fp;
-  // Ğ´ÎÄ¼ş
-  if ((fp = fopen(L->name, "wb")) == NULL) //ÎÄ¼ş´ò¿ªÊ§°Ü
+  // å†™æ–‡ä»¶
+  if ((fp = fopen(L->name, "wb")) == NULL) //æ–‡ä»¶æ‰“å¼€å¤±è´¥
   {
     printf("File open error\n ");
     return ERROR;
@@ -601,12 +601,12 @@ status SaveList(SqList *L) {
   return OK;
 }
 status LoadList(SqList *L) {
-  if (!L) // ÏßĞÔ±íÎ´´´½¨
+  if (!L) // çº¿æ€§è¡¨æœªåˆ›å»º
     return INFEASTABLE;
   else if (!L->elem)
     return INFEASTABLE;
 
-  //¶ÁÎÄ¼ş
+  //è¯»æ–‡ä»¶
   FILE *fp;
   char filename[30];
   printf("input file name: ");
@@ -623,14 +623,14 @@ status LoadList(SqList *L) {
 }
 
 status AddList(Table *head, SqList *L) {
-  if (!L) // ÏßĞÔ±íÎ´´´½¨
+  if (!L) // çº¿æ€§è¡¨æœªåˆ›å»º
     return INFEASTABLE;
   else if (!L->elem)
     return INFEASTABLE;
   Table *p = (Table *)malloc(sizeof(Table));
   p->list = L;
   p->next = NULL;
-  // ºó½øÏÈ³ö  ´øÍ·½Úµã
+  // åè¿›å…ˆå‡º  å¸¦å¤´èŠ‚ç‚¹
   p->next = head->next;
   head->next = p;
   return OK;
@@ -639,7 +639,7 @@ status AddList(Table *head, SqList *L) {
 status ShowLists(Table *head) {
   Table *p = head->next;
   int i = 1;
-  printf("ĞòºÅ\t±í³¤\t±íÃû\n");
+  printf("åºå·\tè¡¨é•¿\tè¡¨å\n");
   while (p) {
     if (p->list->elem == NULL) {
       i++;
@@ -668,9 +668,9 @@ status Choose(Table *head, SqList **L) {
   Table *p = head->next;
   Table *q = p;
   ShowLists(head);
-  printf("ÇëÊäÈëÑ¡ÔñµÄ±íµÄĞòºÅ£º");
+  printf("è¯·è¾“å…¥é€‰æ‹©çš„è¡¨çš„åºå·ï¼š");
   scanf("%d", &i);
-  if (i < 1 || i > LengthofTable(head)) // ĞòºÅ²»ºÏ·¨
+  if (i < 1 || i > LengthofTable(head)) // åºå·ä¸åˆæ³•
     return ERROR;
   int k = i;
   for (k = 1; k < i; k++) {
@@ -689,9 +689,9 @@ status Choose(Table *head, SqList **L) {
 status Remove(Table *head) {
   int i = 0;
   ShowLists(head);
-  printf("ÊäÈëÉ¾³ıĞòºÅ£º");
+  printf("è¾“å…¥åˆ é™¤åºå·ï¼š");
   scanf("%d", &i);
-  if (i < 1 || i > LengthofTable(head)) // ĞòºÅ²»ºÏ·¨
+  if (i < 1 || i > LengthofTable(head)) // åºå·ä¸åˆæ³•
     return ERROR;
 
   Table *p = head;
@@ -699,7 +699,7 @@ status Remove(Table *head) {
   for (j = 1; j < i; j++) {
     p = p->next;
   }
-  Table *q = p->next; // ¸Ä±ä½á¹¹  É¾³ı½Úµã
+  Table *q = p->next; // æ”¹å˜ç»“æ„  åˆ é™¤èŠ‚ç‚¹
   p->next = q->next;
   free(q->list->elem);
   free(q->list);

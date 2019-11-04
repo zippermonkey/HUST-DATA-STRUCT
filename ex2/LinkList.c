@@ -13,45 +13,45 @@
 #define NOTFOUND -4
 #define LISTNUM 3
 typedef int status;
-typedef int ElemType; //Êı¾İÔªËØÀàĞÍ¶¨Òå
+typedef int ElemType; //æ•°æ®å…ƒç´ ç±»å‹å®šä¹‰
 
-/*------- ½Úµã¶¨Òå -------*/
+/*------- èŠ‚ç‚¹å®šä¹‰ -------*/
 typedef struct node
 {
     ElemType data;
     struct node *next;
 } LNode;
 
-typedef LNode *PtrToLNode; // PtrToLNode ÓÃÀ´(PtrToLNode)malloc(sizeof(LNode));
+typedef LNode *PtrToLNode; // PtrToLNode ç”¨æ¥(PtrToLNode)malloc(sizeof(LNode));
 
-// ÓÉ´Ë¶¨ÒåÏßĞÔ±í
-typedef PtrToLNode List; //  ListÓÃÀ´´ú±íÒ»¸ö±í  £¨´øÍ·½Úµã£© List L = (List)malloc(sizeof(LNode))  Í·½ÚµãµÄÊı¾İÓòÓÃÀ´´æ³¤¶È;
+// ç”±æ­¤å®šä¹‰çº¿æ€§è¡¨
+typedef PtrToLNode List; //  Listç”¨æ¥ä»£è¡¨ä¸€ä¸ªè¡¨  ï¼ˆå¸¦å¤´èŠ‚ç‚¹ï¼‰ List L = (List)malloc(sizeof(LNode))  å¤´èŠ‚ç‚¹çš„æ•°æ®åŸŸç”¨æ¥å­˜é•¿åº¦;
 
-/*-------------º¯ÊıÉùÃ÷-----------------*/
-PtrToLNode GetAdress(List L, int e);             // ·µ»ØÄ³Ò»¸öÔªËØµÄÇ°Ò»¸öÔªËØµÄµØÖ·Öµ ²»´æÔÚÔò·µ»Ø×îºóÒ»¸ö½ÚµãµÄµØÖ·
-status isinit(List L);                           // ÅĞ¶ÏLÊÇ·ñ³õÊ¼»¯
-status InitList(List *L);                        // ³õÊ¼»¯±í
-status DestroyList(List *L);                     // ´İ»Ù±í
-status ClearList(List L);                        // Çå¿Õ±í
-status ListEmpty(List L);                        // ±íÊÇ·ñÎª¿Õ
-status ListLength(List L);                       // ·µ»ØÏßĞÔ±í³¤¶È
-status GetElem(List L, int i, int *e);           // ÓÃe·µ»ØµÚiÎ»ÖÃµÄÖµ
-int LocateElem(List L, int e);                   // ·µ»ØeËùÔÚµÄÎ»Ğò
-status PriorElem(List L, int cur_e, int *pre_e); // ÓÃpre_e ´ø»Ø cur_e µÄÇ°Çı
-status NextElem(List L, int cur_e, int *next_e); // ÓÃnext_e´ø»Ø cur_e µÄºó¼Ì
-status ListInsert(List L, int i, int e);         // ÔÚiµÄÎ»ÖÃÉÏ²åÈëe
-status ListDelete(List L, int i, int *e);        //  É¾³ıiµÄÎ»ÖÃµÄÖµ ÓÃe´ø³ö
-status ListTrabverse(List L);                    // ±éÀú
-status InputData(List L);                        //ÊÖ¹¤ÊäÈëÊı¾İ
-status LoadList(List L);                         // ¼ÓÔØ
-status SaveList(List L);                         // ±£´æ
+/*-------------å‡½æ•°å£°æ˜-----------------*/
+PtrToLNode GetAdress(List L, int e);             // è¿”å›æŸä¸€ä¸ªå…ƒç´ çš„å‰ä¸€ä¸ªå…ƒç´ çš„åœ°å€å€¼ ä¸å­˜åœ¨åˆ™è¿”å›æœ€åä¸€ä¸ªèŠ‚ç‚¹çš„åœ°å€
+status isinit(List L);                           // åˆ¤æ–­Læ˜¯å¦åˆå§‹åŒ–
+status InitList(List *L);                        // åˆå§‹åŒ–è¡¨
+status DestroyList(List *L);                     // æ‘§æ¯è¡¨
+status ClearList(List L);                        // æ¸…ç©ºè¡¨
+status ListEmpty(List L);                        // è¡¨æ˜¯å¦ä¸ºç©º
+status ListLength(List L);                       // è¿”å›çº¿æ€§è¡¨é•¿åº¦
+status GetElem(List L, int i, int *e);           // ç”¨eè¿”å›ç¬¬iä½ç½®çš„å€¼
+int LocateElem(List L, int e);                   // è¿”å›eæ‰€åœ¨çš„ä½åº
+status PriorElem(List L, int cur_e, int *pre_e); // ç”¨pre_e å¸¦å› cur_e çš„å‰é©±
+status NextElem(List L, int cur_e, int *next_e); // ç”¨next_eå¸¦å› cur_e çš„åç»§
+status ListInsert(List L, int i, int e);         // åœ¨içš„ä½ç½®ä¸Šæ’å…¥e
+status ListDelete(List L, int i, int *e);        //  åˆ é™¤içš„ä½ç½®çš„å€¼ ç”¨eå¸¦å‡º
+status ListTrabverse(List L);                    // éå†
+status InputData(List L);                        //æ‰‹å·¥è¾“å…¥æ•°æ®
+status LoadList(List L);                         // åŠ è½½
+status SaveList(List L);                         // ä¿å­˜
 
 
 int main(void)
 {
     List L[LISTNUM] = {NULL};
     int op = 1;
-    // ÁÙÊ±±äÁ¿
+    // ä¸´æ—¶å˜é‡
     int i = 0, e = 0;
     int cur_e = 0, next_e = 0, pre_e = 0;
     status sta = OK;
@@ -71,318 +71,318 @@ int main(void)
         printf("    	  -13. InputData        - 14. SaveList\n");
         printf("    	  -15. LoadList         - 0. Exit\n");
         printf("-------------------------------------------------\n");
-        printf("    ÇëÑ¡ÔñÄãµÄ²Ù×÷[0~12]:");
+        printf("    è¯·é€‰æ‹©ä½ çš„æ“ä½œ[0~12]:");
         scanf("%d", &op);
         switch (op)
         {
         case 1:
-            printf("ÇëÊäÈëid(1-%d)£º",LISTNUM);
+            printf("è¯·è¾“å…¥id(1-%d)ï¼š",LISTNUM);
             scanf("%d",&id);
             while(id<1||id>LISTNUM)
             {
-                printf("idÖµÎŞĞ§£¬ÇëÖØĞÂÊäÈëid(1-%d)£º",LISTNUM);
+                printf("idå€¼æ— æ•ˆï¼Œè¯·é‡æ–°è¾“å…¥id(1-%d)ï¼š",LISTNUM);
                 scanf("%d",&id);
             }
             sta = InitList(&L[id-1]);
             if (sta == OK)
-                printf("ÏßĞÔ±í´´½¨³É¹¦£¡\n");
+                printf("çº¿æ€§è¡¨åˆ›å»ºæˆåŠŸï¼\n");
             else if (sta == OVERFLOW)
-                printf("ÏßĞÔ±í´´½¨Ê§°Ü£¡\n");
+                printf("çº¿æ€§è¡¨åˆ›å»ºå¤±è´¥ï¼\n");
             getchar();
             getchar();
             break;
         case 2:
-            printf("ÇëÊäÈëid(1-%d)£º",LISTNUM);
+            printf("è¯·è¾“å…¥id(1-%d)ï¼š",LISTNUM);
             scanf("%d",&id);
             while(id<1||id>LISTNUM)
             {
-                printf("idÖµÎŞĞ§£¬ÇëÖØĞÂÊäÈëid(1-%d)£º",LISTNUM);
+                printf("idå€¼æ— æ•ˆï¼Œè¯·é‡æ–°è¾“å…¥id(1-%d)ï¼š",LISTNUM);
                 scanf("%d",&id);
             }
             if (isinit(L[id-1]) == FALSE)
-                printf("ÏßĞÔ±íÎ´´´½¨\n");
+                printf("çº¿æ€§è¡¨æœªåˆ›å»º\n");
             else
             {
                 DestroyList(&L[id-1]);
-                printf("Ïú»Ù³É¹¦\n");
+                printf("é”€æ¯æˆåŠŸ\n");
             }
             getchar();
             getchar();
             break;
         case 3:
-            printf("ÇëÊäÈëid(1-%d)£º",LISTNUM);
+            printf("è¯·è¾“å…¥id(1-%d)ï¼š",LISTNUM);
             scanf("%d",&id);
             while(id<1||id>LISTNUM)
             {
-                printf("idÖµÎŞĞ§£¬ÇëÖØĞÂÊäÈëid(1-%d)£º",LISTNUM);
+                printf("idå€¼æ— æ•ˆï¼Œè¯·é‡æ–°è¾“å…¥id(1-%d)ï¼š",LISTNUM);
                 scanf("%d",&id);
             }
             if (isinit(L[id-1]) == FALSE)
-                printf("ÏßĞÔ±íÎ´´´½¨\n");
+                printf("çº¿æ€§è¡¨æœªåˆ›å»º\n");
             else
             {
                 ClearList(L[id-1]);
-                printf("ÏßĞÔ±íÇå¿Õ³É¹¦\n");
+                printf("çº¿æ€§è¡¨æ¸…ç©ºæˆåŠŸ\n");
             }
             getchar();
             getchar();
             break;
         case 4:
-            printf("ÇëÊäÈëid(1-%d)£º",LISTNUM);
+            printf("è¯·è¾“å…¥id(1-%d)ï¼š",LISTNUM);
             scanf("%d",&id);
             while(id<1||id>LISTNUM)
             {
-                printf("idÖµÎŞĞ§£¬ÇëÖØĞÂÊäÈëid(1-%d)£º",LISTNUM);
+                printf("idå€¼æ— æ•ˆï¼Œè¯·é‡æ–°è¾“å…¥id(1-%d)ï¼š",LISTNUM);
                 scanf("%d",&id);
             }
             if (isinit(L[id-1]) == FALSE)
-                printf("ÏßĞÔ±íÎ´´´½¨\n");
+                printf("çº¿æ€§è¡¨æœªåˆ›å»º\n");
             else
             {
                 if (ListEmpty(L[id-1]) == TRUE)
-                    printf("ÏßĞÔ±íÎª¿Õ\n");
+                    printf("çº¿æ€§è¡¨ä¸ºç©º\n");
                 else
-                    printf("ÏßĞÔ±í·Ç¿Õ\n");
+                    printf("çº¿æ€§è¡¨éç©º\n");
             }
             getchar();
             getchar();
             break;
         case 5:
-            printf("ÇëÊäÈëid(1-%d)£º",LISTNUM);
+            printf("è¯·è¾“å…¥id(1-%d)ï¼š",LISTNUM);
             scanf("%d",&id);
             while(id<1||id>LISTNUM)
             {
-                printf("idÖµÎŞĞ§£¬ÇëÖØĞÂÊäÈëid(1-%d)£º",LISTNUM);
+                printf("idå€¼æ— æ•ˆï¼Œè¯·é‡æ–°è¾“å…¥id(1-%d)ï¼š",LISTNUM);
                 scanf("%d",&id);
             }
             if (isinit(L[id-1]) == FALSE)
-                printf("ÏßĞÔ±íÎ´´´½¨\n");
+                printf("çº¿æ€§è¡¨æœªåˆ›å»º\n");
             else
             {
-                printf("ÏßĞÔ±íÖĞµÄÔªËØ¸öÊıÎª %d\n", ListLength(L[id-1]));
+                printf("çº¿æ€§è¡¨ä¸­çš„å…ƒç´ ä¸ªæ•°ä¸º %d\n", ListLength(L[id-1]));
             }
             getchar();
             getchar();
             break;
         case 6:
-            printf("ÇëÊäÈëid(1-%d)£º",LISTNUM);
+            printf("è¯·è¾“å…¥id(1-%d)ï¼š",LISTNUM);
             scanf("%d",&id);
             while(id<1||id>LISTNUM)
             {
-                printf("idÖµÎŞĞ§£¬ÇëÖØĞÂÊäÈëid(1-%d)£º",LISTNUM);
+                printf("idå€¼æ— æ•ˆï¼Œè¯·é‡æ–°è¾“å…¥id(1-%d)ï¼š",LISTNUM);
                 scanf("%d",&id);
             }
             if (isinit(L[id-1]) == FALSE)
-                printf("ÏßĞÔ±íÎ´´´½¨\n");
+                printf("çº¿æ€§è¡¨æœªåˆ›å»º\n");
             else
             {
-                printf("ÇëÊäÈëÒªÈ¡µÃÔªËØµÄÎ»Ğòi: ");
+                printf("è¯·è¾“å…¥è¦å–å¾—å…ƒç´ çš„ä½åºi: ");
                 scanf("%d", &i);
                 sta = GetElem(L[id-1], i, &e);
 
                 if (sta == ERROR)
-                    printf("iÖµ²»ºÏ·¨\n");
+                    printf("iå€¼ä¸åˆæ³•\n");
                 else if (sta == OK)
-                    printf("µÚ%dÎ»ÔªËØÊÇ%d\n", i, e);
+                    printf("ç¬¬%dä½å…ƒç´ æ˜¯%d\n", i, e);
             }
             getchar();
             getchar();
             break;
         case 7:
-            printf("ÇëÊäÈëid(1-%d)£º",LISTNUM);
+            printf("è¯·è¾“å…¥id(1-%d)ï¼š",LISTNUM);
             scanf("%d",&id);
             while(id<1||id>LISTNUM)
             {
-                printf("idÖµÎŞĞ§£¬ÇëÖØĞÂÊäÈëid(1-%d)£º",LISTNUM);
+                printf("idå€¼æ— æ•ˆï¼Œè¯·é‡æ–°è¾“å…¥id(1-%d)ï¼š",LISTNUM);
                 scanf("%d",&id);
             }
             if (isinit(L[id-1]) == FALSE)
-                printf("ÏßĞÔ±íÎ´´´½¨\n");
+                printf("çº¿æ€§è¡¨æœªåˆ›å»º\n");
             else
             {
-                printf("ÇëÊäÈëÒª²éÕÒµÄÔªËØÖµ£º");
+                printf("è¯·è¾“å…¥è¦æŸ¥æ‰¾çš„å…ƒç´ å€¼ï¼š");
                 scanf("%d", &e);
                 sta = LocateElem(L[id-1], e);
                 if (sta == NOTFOUND)
-                    printf("ÏßĞÔ±íÖĞÎŞ´ËÔªËØ\n");
+                    printf("çº¿æ€§è¡¨ä¸­æ— æ­¤å…ƒç´ \n");
                 else
-                    printf("ÔªËØ%dµÄÎ»ĞòÊÇ%d", e, sta);
+                    printf("å…ƒç´ %dçš„ä½åºæ˜¯%d", e, sta);
             }
             getchar();
             getchar();
             break;
         case 8:
-            printf("ÇëÊäÈëid(1-%d)£º",LISTNUM);
+            printf("è¯·è¾“å…¥id(1-%d)ï¼š",LISTNUM);
             scanf("%d",&id);
             while(id<1||id>LISTNUM)
             {
-                printf("idÖµÎŞĞ§£¬ÇëÖØĞÂÊäÈëid(1-%d)£º",LISTNUM);
+                printf("idå€¼æ— æ•ˆï¼Œè¯·é‡æ–°è¾“å…¥id(1-%d)ï¼š",LISTNUM);
                 scanf("%d",&id);
             }
             if (isinit(L[id-1]) == FALSE)
-                printf("ÏßĞÔ±íÎ´´´½¨\n");
+                printf("çº¿æ€§è¡¨æœªåˆ›å»º\n");
             else
             {
-                printf("ÇëÊäÈëÒª²éÕÒÆäÇ°ÇıµÄÔªËØÖµ£º");
+                printf("è¯·è¾“å…¥è¦æŸ¥æ‰¾å…¶å‰é©±çš„å…ƒç´ å€¼ï¼š");
                 scanf("%d", &cur_e);
                 sta = PriorElem(L[id-1], cur_e, &pre_e);
                 if (sta == NOTFOUND)
-                    printf("ÏßĞÔ±íÖĞÎŞ´ËÔªËØ\n");
+                    printf("çº¿æ€§è¡¨ä¸­æ— æ­¤å…ƒç´ \n");
                 else if (sta == ERROR)
-                    printf("%dÊÇµÚÒ»¸öÔªËØÃ»ÓĞÇ°Çı\n", cur_e);
+                    printf("%dæ˜¯ç¬¬ä¸€ä¸ªå…ƒç´ æ²¡æœ‰å‰é©±\n", cur_e);
                 else
-                    printf("%dµÄÇ°ÇıÊÇ%d\n", cur_e, pre_e);
+                    printf("%dçš„å‰é©±æ˜¯%d\n", cur_e, pre_e);
             }
             getchar();
             getchar();
             break;
         case 9:
-            printf("ÇëÊäÈëid(1-%d)£º",LISTNUM);
+            printf("è¯·è¾“å…¥id(1-%d)ï¼š",LISTNUM);
             scanf("%d",&id);
             while(id<1||id>LISTNUM)
             {
-                printf("idÖµÎŞĞ§£¬ÇëÖØĞÂÊäÈëid(1-%d)£º",LISTNUM);
+                printf("idå€¼æ— æ•ˆï¼Œè¯·é‡æ–°è¾“å…¥id(1-%d)ï¼š",LISTNUM);
                 scanf("%d",&id);
             }
             if (isinit(L[id-1]) == FALSE)
-                printf("ÏßĞÔ±íÎ´´´½¨\n");
+                printf("çº¿æ€§è¡¨æœªåˆ›å»º\n");
             else
             {
-                printf("ÇëÊäÈëÒª²éÕÒÆäºó¼ÌµÄÔªËØÖµ£º");
+                printf("è¯·è¾“å…¥è¦æŸ¥æ‰¾å…¶åç»§çš„å…ƒç´ å€¼ï¼š");
                 scanf("%d", &cur_e);
                 sta = NextElem(L[id-1], cur_e, &next_e);
                 if (sta == NOTFOUND)
-                    printf("ÏßĞÔ±íÖĞÎŞ´ËÔªËØ\n");
+                    printf("çº¿æ€§è¡¨ä¸­æ— æ­¤å…ƒç´ \n");
                 else if (sta == ERROR)
-                    printf("%dÊÇ×îºóÒ»¸öÔªËØÃ»ÓĞºó¼Ì\n", cur_e);
+                    printf("%dæ˜¯æœ€åä¸€ä¸ªå…ƒç´ æ²¡æœ‰åç»§\n", cur_e);
                 else
-                    printf("%dµÄºó¼ÌÊÇ%d\n", cur_e, next_e);
+                    printf("%dçš„åç»§æ˜¯%d\n", cur_e, next_e);
             }
             getchar();
             getchar();
             break;
         case 10:
-            printf("ÇëÊäÈëid(1-%d)£º",LISTNUM);
+            printf("è¯·è¾“å…¥id(1-%d)ï¼š",LISTNUM);
             scanf("%d",&id);
             while(id<1||id>LISTNUM)
             {
-                printf("idÖµÎŞĞ§£¬ÇëÖØĞÂÊäÈëid(1-%d)£º",LISTNUM);
+                printf("idå€¼æ— æ•ˆï¼Œè¯·é‡æ–°è¾“å…¥id(1-%d)ï¼š",LISTNUM);
                 scanf("%d",&id);
             }
             if (isinit(L[id-1]) == FALSE)
-                printf("ÏßĞÔ±íÎ´´´½¨\n");
+                printf("çº¿æ€§è¡¨æœªåˆ›å»º\n");
             else
             {
-                printf("ÇëÊäÈëÒª²åÈëµÄÎ»ÖÃ:");
+                printf("è¯·è¾“å…¥è¦æ’å…¥çš„ä½ç½®:");
                 scanf("%d", &i);
-                printf("ÇëÊäÈëÒª²åÈëµÄÔªËØ£º");
+                printf("è¯·è¾“å…¥è¦æ’å…¥çš„å…ƒç´ ï¼š");
                 scanf("%d", &e);
                 sta = ListInsert(L[id-1], i, e);
                 if (sta == ERROR)
-                    printf("²åÈëÎ»ÖÃ²»ºÏ·¨\n");
+                    printf("æ’å…¥ä½ç½®ä¸åˆæ³•\n");
                 else
-                    printf("²åÈë³É¹¦\n");
+                    printf("æ’å…¥æˆåŠŸ\n");
             }
             getchar();
             getchar();
             break;
         case 11:
-            printf("ÇëÊäÈëid(1-%d)£º",LISTNUM);
+            printf("è¯·è¾“å…¥id(1-%d)ï¼š",LISTNUM);
             scanf("%d",&id);
             while(id<1||id>LISTNUM)
             {
-                printf("idÖµÎŞĞ§£¬ÇëÖØĞÂÊäÈëid(1-%d)£º",LISTNUM);
+                printf("idå€¼æ— æ•ˆï¼Œè¯·é‡æ–°è¾“å…¥id(1-%d)ï¼š",LISTNUM);
                 scanf("%d",&id);
             }
             if (isinit(L[id-1]) == FALSE)
-                printf("ÏßĞÔ±íÎ´´´½¨\n");
+                printf("çº¿æ€§è¡¨æœªåˆ›å»º\n");
             else
             {
-                printf("ÇëÊäÈëÒªÉ¾³ıµÄÎ»ÖÃ:");
+                printf("è¯·è¾“å…¥è¦åˆ é™¤çš„ä½ç½®:");
                 scanf("%d", &i);
 
                 sta = ListDelete(L[id-1], i, &e);
                 if (sta == ERROR)
-                    printf("É¾³ıÎ»ÖÃ²»ºÏ·¨\n");
+                    printf("åˆ é™¤ä½ç½®ä¸åˆæ³•\n");
                 else
-                    printf("É¾³ı%d³É¹¦\n", e);
+                    printf("åˆ é™¤%dæˆåŠŸ\n", e);
             }
             getchar();
             getchar();
             break;
         case 12:
-            printf("ÇëÊäÈëid(1-%d)£º",LISTNUM);
+            printf("è¯·è¾“å…¥id(1-%d)ï¼š",LISTNUM);
             scanf("%d",&id);
             while(id<1||id>LISTNUM)
             {
-                printf("idÖµÎŞĞ§£¬ÇëÖØĞÂÊäÈëid(1-%d)£º",LISTNUM);
+                printf("idå€¼æ— æ•ˆï¼Œè¯·é‡æ–°è¾“å…¥id(1-%d)ï¼š",LISTNUM);
                 scanf("%d",&id);
             }
             if (isinit(L[id-1]) == FALSE)
-                printf("ÏßĞÔ±íÎ´´´½¨\n");
+                printf("çº¿æ€§è¡¨æœªåˆ›å»º\n");
             else
             {
                 sta = ListTrabverse(L[id-1]);
                 if (sta == ERROR)
-                    printf("ÏßĞÔ±íÎª¿Õ±í\n");
+                    printf("çº¿æ€§è¡¨ä¸ºç©ºè¡¨\n");
             }
             getchar();
             getchar();
             break;
         case 13:
-            printf("ÇëÊäÈëid(1-%d)£º",LISTNUM);
+            printf("è¯·è¾“å…¥id(1-%d)ï¼š",LISTNUM);
             scanf("%d",&id);
             while(id<1||id>LISTNUM)
             {
-                printf("idÖµÎŞĞ§£¬ÇëÖØĞÂÊäÈëid(1-%d)£º",LISTNUM);
+                printf("idå€¼æ— æ•ˆï¼Œè¯·é‡æ–°è¾“å…¥id(1-%d)ï¼š",LISTNUM);
                 scanf("%d",&id);
             }
             if (isinit(L[id-1]) == FALSE)
-                printf("ÏßĞÔ±íÎ´´´½¨\n");
+                printf("çº¿æ€§è¡¨æœªåˆ›å»º\n");
             else
             {
-                printf("ÇëÊäÈëÊı¾İ£¬ÒÔqÍË³ö\n");
+                printf("è¯·è¾“å…¥æ•°æ®ï¼Œä»¥qé€€å‡º\n");
                 InputData(L[id-1]);
             }
             getchar();
             getchar();
             break;
         case 14:
-            printf("ÇëÊäÈëid(1-%d)£º",LISTNUM);
+            printf("è¯·è¾“å…¥id(1-%d)ï¼š",LISTNUM);
             scanf("%d",&id);
             while(id<1||id>LISTNUM)
             {
-                printf("idÖµÎŞĞ§£¬ÇëÖØĞÂÊäÈëid(1-%d)£º",LISTNUM);
+                printf("idå€¼æ— æ•ˆï¼Œè¯·é‡æ–°è¾“å…¥id(1-%d)ï¼š",LISTNUM);
                 scanf("%d",&id);
             }
             if (isinit(L[id-1]) == FALSE)
-                printf("ÏßĞÔ±íÎ´´´½¨\n");
+                printf("çº¿æ€§è¡¨æœªåˆ›å»º\n");
             else
             {
                 if (SaveList(L[id-1]) == ERROR)
-                    printf("ÎÄ¼ş´ò¿ªÊ§°Ü\n");
+                    printf("æ–‡ä»¶æ‰“å¼€å¤±è´¥\n");
                 else
-                    printf("±£´æ³É¹¦\n");
+                    printf("ä¿å­˜æˆåŠŸ\n");
             }
             getchar();
             getchar();
             break;
         case 15:
-            printf("ÇëÊäÈëid(1-%d)£º",LISTNUM);
+            printf("è¯·è¾“å…¥id(1-%d)ï¼š",LISTNUM);
             scanf("%d",&id);
             while(id<1||id>LISTNUM)
             {
-                printf("idÖµÎŞĞ§£¬ÇëÖØĞÂÊäÈëid(1-%d)£º",LISTNUM);
+                printf("idå€¼æ— æ•ˆï¼Œè¯·é‡æ–°è¾“å…¥id(1-%d)ï¼š",LISTNUM);
                 scanf("%d",&id);
             }
             if (isinit(L[id-1]) == FALSE)
-                printf("ÏßĞÔ±íÎ´´´½¨\n");
+                printf("çº¿æ€§è¡¨æœªåˆ›å»º\n");
             else
             {
                 if (LoadList(L[id-1]) == ERROR)
-                    printf("ÎÄ¼ş´ò¿ªÊ§°Ü\n");
+                    printf("æ–‡ä»¶æ‰“å¼€å¤±è´¥\n");
                 else
-                    printf("¼ÓÔØ³É¹¦\n");
+                    printf("åŠ è½½æˆåŠŸ\n");
             }
             getchar();
             getchar();
@@ -391,7 +391,7 @@ int main(void)
             break;
         } //end of switch
     }     //end of while
-    printf("»¶Ó­ÏÂ´ÎÔÙÊ¹ÓÃ±¾ÏµÍ³£¡\n");
+    printf("æ¬¢è¿ä¸‹æ¬¡å†ä½¿ç”¨æœ¬ç³»ç»Ÿï¼\n");
     return 0;
 } //end of main()
 
@@ -405,7 +405,7 @@ status isinit(List L)
 
 PtrToLNode GetAdress(List L, int e)
 {
-    // ·µ»ØÄ³Ò»¸öÔªËØµÄÇ°Ò»¸öÔªËØµÄµØÖ·Öµ ²»´æÔÚÔò·µ»Ø×îºóÒ»¸ö½ÚµãµÄµØÖ·
+    // è¿”å›æŸä¸€ä¸ªå…ƒç´ çš„å‰ä¸€ä¸ªå…ƒç´ çš„åœ°å€å€¼ ä¸å­˜åœ¨åˆ™è¿”å›æœ€åä¸€ä¸ªèŠ‚ç‚¹çš„åœ°å€
     PtrToLNode p = L;
     while (p->next && p->next->data != e)
         p = p->next;
@@ -415,13 +415,13 @@ PtrToLNode GetAdress(List L, int e)
 status InitList(List *L)
 {
 
-    // ·ÖÅä¿Õ¼ä
-    (*L) = (List)malloc(sizeof(LNode)); // ´´½¨Ò»¸ö´øÍ·½ÚµãµÄ¿ÕÁ´±í
+    // åˆ†é…ç©ºé—´
+    (*L) = (List)malloc(sizeof(LNode)); // åˆ›å»ºä¸€ä¸ªå¸¦å¤´èŠ‚ç‚¹çš„ç©ºé“¾è¡¨
     if ((*L) == NULL)
         return (OVERFLOW);
     (*L)->next = NULL;
-    (*L)->data = 0; // 0±íÊ¾µ±Ç°±íµÄ³¤¶ÈÎª0
-    return OK;      // ´´½¨³É¹¦
+    (*L)->data = 0; // 0è¡¨ç¤ºå½“å‰è¡¨çš„é•¿åº¦ä¸º0
+    return OK;      // åˆ›å»ºæˆåŠŸ
 
 } // InitList
 
@@ -429,19 +429,19 @@ status DestroyList(List *L)
 {
 
 
-    // LÊÇÕâ¸ö±íµÄÍ·½Úµã  ×îºó°Ñfree(L)
-    // È»ºó°ÑLÎªNULL
-    PtrToLNode temp1 = (*L); // ÁÙÊ±±äÁ¿Ö¸ÏòÍ·²¿
+    // Læ˜¯è¿™ä¸ªè¡¨çš„å¤´èŠ‚ç‚¹  æœ€åæŠŠfree(L)
+    // ç„¶åæŠŠLä¸ºNULL
+    PtrToLNode temp1 = (*L); // ä¸´æ—¶å˜é‡æŒ‡å‘å¤´éƒ¨
     PtrToLNode temp2 = temp1;
 
     while (temp1)
     {
-        // ÊÍ·Å¸÷¸ö½Úµã¿Õ¼ä
+        // é‡Šæ”¾å„ä¸ªèŠ‚ç‚¹ç©ºé—´
         temp2 = temp1->next;
         free(temp1);
         temp1 = temp2;
     }
-    // ½«LÖÃÎª¿Õ
+    // å°†Lç½®ä¸ºç©º
     *L = NULL;
     return OK;
 }
@@ -455,8 +455,8 @@ status ListEmpty(List L)
 }
 status ClearList(List L)
 {
-    // ±£ÁôÍ·½Úµã ½«Í·½ÚµãdataÉèÖÃÎª0
-    // free ÆäËû½Úµã
+    // ä¿ç•™å¤´èŠ‚ç‚¹ å°†å¤´èŠ‚ç‚¹dataè®¾ç½®ä¸º0
+    // free å…¶ä»–èŠ‚ç‚¹
 
     PtrToLNode t = L->next;
     if (ListEmpty(L) == TRUE)
@@ -469,14 +469,14 @@ status ClearList(List L)
 }
 int ListLength(List L)
 {
-    // ·µ»ØÏßĞÔ±í³¤¶È
+    // è¿”å›çº¿æ€§è¡¨é•¿åº¦
 
     return L->data;
 }
 status GetElem(List L, int i, int *e)
 {
 
-    if (i < 1 || i > ListLength(L)) //i ²»ºÏ·¨
+    if (i < 1 || i > ListLength(L)) //i ä¸åˆæ³•
         return ERROR;
 
     int k = 0;
@@ -498,18 +498,18 @@ int LocateElem(List L, int e)
         p = p->next;
         i++;
     }
-    if (p) // Èç¹ûÕÒµ½
+    if (p) // å¦‚æœæ‰¾åˆ°
         return i;
-    else //Ã»ÕÒµ½
+    else //æ²¡æ‰¾åˆ°
         return NOTFOUND;
 }
 
 status PriorElem(List L, int cur_e, int *pre_e)
 {
     PtrToLNode p = GetAdress(L, cur_e);
-    if (p->next == NULL) // Ã»ÓĞÕâÒ»¸öÔªËØ
+    if (p->next == NULL) // æ²¡æœ‰è¿™ä¸€ä¸ªå…ƒç´ 
         return NOTFOUND;
-    else if (p == L) // µÚÒ»¸öÔªËØ  Ã»ÓĞÇ°Çı
+    else if (p == L) // ç¬¬ä¸€ä¸ªå…ƒç´   æ²¡æœ‰å‰é©±
         return ERROR;
     else
     {
@@ -522,9 +522,9 @@ status NextElem(List L, int cur_e, int *next_e)
 {
 
     PtrToLNode p = GetAdress(L, cur_e);
-    if (p->next == NULL) // Ã»ÓĞÕâÒ»¸öÔªËØ
+    if (p->next == NULL) // æ²¡æœ‰è¿™ä¸€ä¸ªå…ƒç´ 
         return NOTFOUND;
-    else if (p->next->next == NULL) // ×îºóÒ»¸öÔªËØ  Ã»ÓĞºó¼Ì
+    else if (p->next->next == NULL) // æœ€åä¸€ä¸ªå…ƒç´   æ²¡æœ‰åç»§
         return ERROR;
     else
     {
@@ -535,10 +535,10 @@ status NextElem(List L, int cur_e, int *next_e)
 
 status ListInsert(List L, int i, int e)
 {
-    //ÔÚiµÄÎ»ÖÃÉÏ²åÈëe
-    PtrToLNode p = L; // pÎªÒª²åÈëµÄÎ»ÖÃµÄÇ°Ò»¸öÎ»ÖÃ
+    //åœ¨içš„ä½ç½®ä¸Šæ’å…¥e
+    PtrToLNode p = L; // pä¸ºè¦æ’å…¥çš„ä½ç½®çš„å‰ä¸€ä¸ªä½ç½®
 
-    if (i < 1 || i > ListLength(L) + 1) //i ²»ºÏ·¨
+    if (i < 1 || i > ListLength(L) + 1) //i ä¸åˆæ³•
         return ERROR;
     else
         while (--i)
@@ -553,10 +553,10 @@ status ListInsert(List L, int i, int e)
 
 status ListDelete(List L, int i, int *e)
 {
-    // É¾³ıiµÄÎ»ÖÃµÄÖµ ÓÃe´ø³ö
+    // åˆ é™¤içš„ä½ç½®çš„å€¼ ç”¨eå¸¦å‡º
 
-    PtrToLNode p = L;               // pÎªÒªÉ¾³ıµÄÎ»ÖÃµÄÇ°Ò»¸öÎ»ÖÃ
-    if (i < 1 || i > ListLength(L)) //i ²»ºÏ·¨
+    PtrToLNode p = L;               // pä¸ºè¦åˆ é™¤çš„ä½ç½®çš„å‰ä¸€ä¸ªä½ç½®
+    if (i < 1 || i > ListLength(L)) //i ä¸åˆæ³•
         return ERROR;
     else
         while (--i)
@@ -570,7 +570,7 @@ status ListDelete(List L, int i, int *e)
 }
 status ListTrabverse(List L)
 {
-    // ±éÀú
+    // éå†
     if (ListEmpty(L) == TRUE)
         return ERROR;
     else
@@ -589,10 +589,10 @@ status ListTrabverse(List L)
 }
 status InputData(List L)
 {
-    //ÊÖ¹¤ÊäÈëÊı¾İ  Ìíµ½µ±Ç°±íµÄÎ²²¿
+    //æ‰‹å·¥è¾“å…¥æ•°æ®  æ·»åˆ°å½“å‰è¡¨çš„å°¾éƒ¨
 
     PtrToLNode p = L;
-    while (p->next) // ÕÒµ½Î²²¿
+    while (p->next) // æ‰¾åˆ°å°¾éƒ¨
     {
         p = p->next;
     }
@@ -600,7 +600,7 @@ status InputData(List L)
     int t;
     while (scanf("%d", &t) == 1)
     {
-        PtrToLNode q = (PtrToLNode)malloc(sizeof(LNode)); // ÁÙÊ±±äÁ¿
+        PtrToLNode q = (PtrToLNode)malloc(sizeof(LNode)); // ä¸´æ—¶å˜é‡
         q->data = t;
         q->next = NULL;
         p->next = q;
@@ -614,11 +614,11 @@ status InputData(List L)
 status SaveList(List L)
 {
     char name[41];
-    printf("ÇëÊäÈëÎÄ¼şÃû£¬ÉÙÓÚ40×Ö·û\n");
+    printf("è¯·è¾“å…¥æ–‡ä»¶åï¼Œå°‘äº40å­—ç¬¦\n");
     scanf("%s", name);
     FILE *fp;
-    // Ğ´ÎÄ¼ş
-    if ((fp = fopen(name, "wb")) == NULL) //ÎÄ¼ş´ò¿ªÊ§°Ü
+    // å†™æ–‡ä»¶
+    if ((fp = fopen(name, "wb")) == NULL) //æ–‡ä»¶æ‰“å¼€å¤±è´¥
     {
         printf("File open error\n ");
         return ERROR;
@@ -636,7 +636,7 @@ status SaveList(List L)
 
 status LoadList(List L)
 {
-    //¶ÁÎÄ¼ş
+    //è¯»æ–‡ä»¶
     FILE *fp;
     char filename[30];
     printf("input file name: ");
