@@ -70,7 +70,7 @@ typedef struct QMgr *Queue;
 
 int GetID(); //输入树的ID
 Status InitBiTree(BiTree *T);
-Status CreateBiTree(BiTree *T);
+Status CreateBiTree(BiTree T);
 Status DestroyBiTree(BiTree *T);
 Status ClearBiTree(BiTree T);
 int BiTreeDepth(BiTree T);                                  //求二叉树深度 递归实现
@@ -87,11 +87,10 @@ Status DeleteNode(BiTree T, KeyType e);                     // 删除节点
 Status PrintTNodeInfo(Position node);                       //打印一个节点的信息
 Status PrintAllInfo(BiTree T, Position node);               //打印一个节点的信息
 Status SaveTreeToFile(BiTree T);                            // 将树保存到文件里面 存储key和Data
-Status LoadTreeFromFile(BiTree *T);                         // 从文件恢复二叉树
+Status LoadTreeFromFile(BiTree T);                          // 从文件恢复二叉树
 int main()
 {
     TreeMgr L;
-    BiTree T1, T2;
     Position p;
     int op = 1, key;
     int i;
@@ -124,7 +123,7 @@ int main()
         printf("17. LoadTree\t\t\t\t0. Exit\n");
         printf("-------------------------------------------------\n");
 
-        printf("请选择你的操作[0~15]:");
+        printf("请选择你的操作[0~17]:");
         scanf("%d", &op);
 
         switch (op)
@@ -134,6 +133,8 @@ int main()
             //if(L.elem[n-1].Head == NULL)  // 如果没有初始化
             id = GetID();
             InitBiTree(&(L.elem[id - 1].Head));
+            printf("input tree name:");
+            scanf("%s", L.elem[id - 1].name);
             printf("二叉树初始化成功\n");
             getchar();
             getchar();
@@ -146,7 +147,8 @@ int main()
             else
             {
                 printf("前序 \'#\'表示空节点\n");
-                if (CreateBiTree(&(L.elem[id - 1].Head)) == OK)
+
+                if (CreateBiTree(L.elem[id - 1].Head) == OK)
                     printf("二叉树创建成功\n\n");
             }
             break;
@@ -384,7 +386,7 @@ int main()
             if (L.elem[id - 1].Head == NULL) // 未初始化
                 printf("二叉树不存在！\n");
             else
-                LoadTreeFromFile(&(L.elem[id - 1].Head));
+                LoadTreeFromFile(L.elem[id - 1].Head);
             getchar();
             getchar();
             break;
@@ -528,7 +530,7 @@ Status InitBiTree(BiTree *T)
     return OK;
 }
 
-Status CreateBiTree(BiTree *T)
+Status CreateBiTree(BiTree T)
 {
     // 如果使用堆栈实现 key 为满二叉树的顺序
     char ch; //读取字符
@@ -572,7 +574,7 @@ Status CreateBiTree(BiTree *T)
             if (isroot)
             {
                 Temp->key = 1; //根节点key为1
-                (*T)->Right = Temp;
+                T->Right = Temp;
                 isroot = 0;
             }
             else
@@ -621,8 +623,8 @@ Status PostOrderTraverse(BiTree T)
         return 0;
     else
     {
-        PreOrderTraverse(T->Left);
-        PreOrderTraverse(T->Right);
+        PostOrderTraverse(T->Left);
+        PostOrderTraverse(T->Right);
         if (T->key != 0)
             printf("%c  ", T->Data);
     }
@@ -939,16 +941,22 @@ Status PrintAllInfo(BiTree T, Position node)
         printf("Parents info:\n");
         PrintTNodeInfo(parents);
     }
+    else
+        printf("It doesn't have a parent node.\n");
     if (node->Left)
     {
         printf("Left child info:\n");
         PrintTNodeInfo(node->Left);
     }
+    else
+        printf("It doesn't have a left child node.\n");
     if (node->Right)
     {
         printf("Right child info:\n");
         PrintTNodeInfo(node->Right);
     }
+    else
+        printf("It doesn't have a right child node.\n");
     return OK;
 }
 
@@ -987,10 +995,10 @@ Status SaveTreeToFile(BiTree T)
     fclose(fp);
     return OK;
 }
-Status LoadTreeFromFile(BiTree *T)
+Status LoadTreeFromFile(BiTree T)
 {
     FILE *fp;
-    BiTree P = (*T);
+    BiTree P = T;
     BiTree Temp = NULL;
     char filename[41];
     printf("input filename: ");
@@ -1005,14 +1013,14 @@ Status LoadTreeFromFile(BiTree *T)
     fread(&(Temp->key), sizeof(KeyType), 1, fp);
     fread(&(Temp->Data), sizeof(ElemType), 1, fp);
     Temp->Left = Temp->Right = NULL;
-    (*T)->Right = Temp;
+    T->Right = Temp;
 
     //2. 其他节点
     Temp = (BiTree)malloc(sizeof(struct TNode));
     while (fread(&(Temp->key), sizeof(KeyType), 1, fp) && fread(&(Temp->Data), sizeof(ElemType), 1, fp))
     {
         Temp->Left = Temp->Right = NULL;
-        P = LocateNode((*T), Temp->key / 2);
+        P = LocateNode(T, Temp->key / 2);
         if (Temp->key % 2 == 0) // Temp是p的左儿子
             P->Left = Temp;
         else if (Temp->key % 2 == 1)
