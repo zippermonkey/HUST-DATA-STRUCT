@@ -120,8 +120,8 @@ int main()
         printf("9. GetSibling\t\t\t\t10. InsertNode \n");
         printf("11. DeleteNode\t\t\t\t12. PreOrderTraverse \n");
         printf("13. InOrderTraverse\t\t\t14. PostOrderTraverse \n");
-        printf("15. LevelOrderTraverse          \n");
-        printf("0. Exit\n");
+        printf("15. LevelOrderTraverse\t\t\t16. SaveTree\n");
+        printf("17. LoadTree\t\t\t\t0. Exit\n");
         printf("-------------------------------------------------\n");
 
         printf("请选择你的操作[0~15]:");
@@ -366,6 +366,25 @@ int main()
                 printf("二叉树不存在！\n");
             else
                 LevelTraverse(L.elem[id - 1].Head);
+            getchar();
+            getchar();
+            break;
+        case 16:
+            // Save
+            id = GetID();
+            if (L.elem[id - 1].Head == NULL) // 未初始化
+                printf("二叉树不存在！\n");
+            else
+                SaveTreeToFile(L.elem[id - 1].Head);
+            getchar();
+            getchar();
+            break;
+        case 17:
+            id = GetID();
+            if (L.elem[id - 1].Head == NULL) // 未初始化
+                printf("二叉树不存在！\n");
+            else
+                LoadTreeFromFile(&(L.elem[id - 1].Head));
             getchar();
             getchar();
             break;
@@ -937,6 +956,7 @@ Status SaveTreeToFile(BiTree T)
 {
     FILE *fp;
     char filename[41];
+    printf("Please input filename: ");
     scanf("%s", filename);
     // 写文件
     if ((fp = fopen(filename, "wb")) == NULL) //文件打开失败
@@ -947,19 +967,24 @@ Status SaveTreeToFile(BiTree T)
     // 使用层序遍历的顺序保存  照抄一下层序
     Queue Q;
     BiTree P;
+    KeyType key;
+    ElemType data;
     Q = CreateQueue();
     AddQ(Q, T->Right); //将根节点放入队列
     while (!IsEmptyQ(Q))
     {
         P = DeleteQ(Q);
         //printf("%c  ", P->Data);  改成保存
-        fwrite(&(P->key), sizeof(KeyType), 1, fp);
-        fwrite(&(P->Data), sizeof(ElemType), 1, fp);
+        key = P->key;
+        data = P->Data;
+        fwrite(&(key), sizeof(KeyType), 1, fp);
+        fwrite(&(data), sizeof(ElemType), 1, fp);
         if (P->Left)
             AddQ(Q, P->Left);
         if (P->Right)
             AddQ(Q, P->Right);
     }
+    fclose(fp);
     return OK;
 }
 Status LoadTreeFromFile(BiTree *T)
@@ -967,7 +992,7 @@ Status LoadTreeFromFile(BiTree *T)
     FILE *fp;
     BiTree P = (*T);
     BiTree Temp = NULL;
-    char filename[30];
+    char filename[41];
     printf("input filename: ");
     scanf("%s", filename);
     if ((fp = fopen(filename, "rb")) == NULL)
@@ -983,6 +1008,7 @@ Status LoadTreeFromFile(BiTree *T)
     (*T)->Right = Temp;
 
     //2. 其他节点
+    Temp = (BiTree)malloc(sizeof(struct TNode));
     while (fread(&(Temp->key), sizeof(KeyType), 1, fp) && fread(&(Temp->Data), sizeof(ElemType), 1, fp))
     {
         Temp->Left = Temp->Right = NULL;
@@ -991,6 +1017,8 @@ Status LoadTreeFromFile(BiTree *T)
             P->Left = Temp;
         else if (Temp->key % 2 == 1)
             P->Right = Temp;
+        Temp = (BiTree)malloc(sizeof(struct TNode));
     }
+    fclose(fp);
     return OK;
 }
