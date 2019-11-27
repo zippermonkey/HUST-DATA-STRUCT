@@ -504,6 +504,7 @@ Status InitBiTree(BiTree *T)
     (*T) = (BiTree)malloc(sizeof(struct TNode));
     (*T)->Left = NULL;
     (*T)->Right = NULL;
+    (*T)->key = 0;
     (*T)->Data = '#'; //左右子树为空
     return OK;
 }
@@ -552,7 +553,7 @@ Status CreateBiTree(BiTree *T)
             if (isroot)
             {
                 Temp->key = 1; //根节点key为1
-                (*T) = Temp;
+                (*T)->Right = Temp;
                 isroot = 0;
             }
             else
@@ -576,7 +577,8 @@ Status CreateBiTree(BiTree *T)
     } while (!IsEmptyS(S) || quit == 0);
     free(S);
     while ((c = getchar()) != EOF && c != '\n')
-        return OK;
+        ;
+    return OK;
 }
 
 Status PreOrderTraverse(BiTree T)
@@ -586,7 +588,8 @@ Status PreOrderTraverse(BiTree T)
         return 0;
     else
     {
-        printf("%c  ", T->Data);
+        if (T->key != 0)
+            printf("%c  ", T->Data);
         PreOrderTraverse(T->Left);
         PreOrderTraverse(T->Right);
     }
@@ -601,13 +604,15 @@ Status PostOrderTraverse(BiTree T)
     {
         PreOrderTraverse(T->Left);
         PreOrderTraverse(T->Right);
-        printf("%c  ", T->Data);
+        if (T->key != 0)
+            printf("%c  ", T->Data);
     }
     return OK;
 }
 Status InOrderTraverse(BiTree T)
-{
-    BiTree P = T;
+{ //T是头节点
+
+    BiTree P = T->Right; //P作为树的根结点
     Stack S = CreateStack();
     while (P || !IsEmptyS(S))
     {
@@ -632,7 +637,7 @@ Status LevelTraverse(BiTree T)
     Queue Q;
     BiTree P;
     Q = CreateQueue();
-    AddQ(Q, T); //将根节点放入队列
+    AddQ(Q, T->Right); //将根节点放入队列
     while (!IsEmptyQ(Q))
     {
         P = DeleteQ(Q);
@@ -663,9 +668,9 @@ Status DestroyBiTree(BiTree *T)
 Status ClearBiTree(BiTree T)
 {
     // 分别将左右子树销毁
-    DestroyBiTree(&(T->Left));
+    // 传入头节点 最后只剩下头节点
     DestroyBiTree(&(T->Right));
-    T->Data = '#'; // 同时将根结点设置为空
+    T->Right = NULL;
     return OK;
 }
 int BiTreeDepth(BiTree T)
@@ -677,6 +682,8 @@ int BiTreeDepth(BiTree T)
         HL = BiTreeDepth(T->Left);
         HR = BiTreeDepth(T->Right);
         MaxH = (HL > HR) ? HL : HR;
+        if (T->key == 0)
+            return MaxH;
         return 1 + MaxH;
     }
     return 0;
@@ -684,7 +691,7 @@ int BiTreeDepth(BiTree T)
 Status BiTreeEmpty(BiTree T)
 {
     // 判断空二叉树
-    if (T->Data == '#')
+    if (T->Right == NULL)
         return TRUE;
     else
         return FALSE;
@@ -695,7 +702,7 @@ Position LocateNode(BiTree T, KeyType e)
         return NULL;
 
     // 利用key 反向生成查找序列
-    BiTree P = T;
+    BiTree P = T->Right;
     int n = (int)(log2(e)); // 序列长度
     int x = e;
     int path[n]; // 左0右1
@@ -721,6 +728,8 @@ Position LocateNode(BiTree T, KeyType e)
 Status Assign(BiTree T, KeyType e, ElemType value)
 {
     //节点赋值
+    if (e <= 0)
+        return ERROR;
     Position Temp = LocateNode(T, e);
     Temp->Data = value;
     return OK;
@@ -729,6 +738,8 @@ Position GetSibling(BiTree T, KeyType e)
 {
     // 获取兄弟节点
     KeyType se;
+    // if (e == 1)
+    //     return NULL;
     se = (e % 2) ? e - 1 : e + 1;
     return LocateNode(T, se);
 }
@@ -815,7 +826,11 @@ Status DeleteNode(BiTree T, KeyType e)
         return ERROR;
 
     // F 表示e的父节点
-    Position F = LocateNode(T, e / 2);
+    Position F;
+    if (e == 1)
+        F = T;
+    else
+        F = LocateNode(T, e / 2);
     // D 表示要删除的节点
     Position D = LocateNode(T, e);
 
@@ -933,7 +948,7 @@ Status SaveTreeToFile(BiTree T)
     Queue Q;
     BiTree P;
     Q = CreateQueue();
-    AddQ(Q, T); //将根节点放入队列
+    AddQ(Q, T->Right); //将根节点放入队列
     while (!IsEmptyQ(Q))
     {
         P = DeleteQ(Q);
@@ -965,7 +980,7 @@ Status LoadTreeFromFile(BiTree *T)
     fread(&(Temp->key), sizeof(KeyType), 1, fp);
     fread(&(Temp->Data), sizeof(ElemType), 1, fp);
     Temp->Left = Temp->Right = NULL;
-    *T = Temp;
+    (*T)->Right = Temp;
 
     //2. 其他节点
     while (fread(&(Temp->key), sizeof(KeyType), 1, fp) && fread(&(Temp->Data), sizeof(ElemType), 1, fp))
